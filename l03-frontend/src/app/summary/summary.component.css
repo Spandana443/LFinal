@@ -1,0 +1,57 @@
+/* Container for Summary Page */
+.summary-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f8ff; /* Light blue background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading for Summary Page */
+.summary-heading {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50; /* Dark blue color for text */
+  margin-bottom: 20px;
+}
+
+/* Content Section */
+.summary-content {
+  font-size: 1rem;
+  color: #34495e; /* Subtle gray for text */
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Chart Section */
+.summary-chart-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.chart-container {
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #dcdcdc; /* Light border around chart */
+  background-color: #ffffff; /* White background for chart */
+  border-radius: 8px;
+}
+
+/* Chart Canvas */
+canvas {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Links */
+a {
+  color: #1abc9c; /* Green color for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

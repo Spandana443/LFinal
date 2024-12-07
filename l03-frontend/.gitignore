@@ -1,0 +1,25 @@
+node_modules/
+# Node.js dependencies
+node_modules/
+
+# Angular build artifacts
+dist/
+.angular/
+
+# IDE and editor files
+.vscode/
+*.log
+
+# Generated files
+*.cache
+*.tmp
+*.lock
+*.bak
+
+# Environment and configuration files
+src/environments/environment*.ts
+
+# Compiled files
+*.js
+*.d.ts
+*.map

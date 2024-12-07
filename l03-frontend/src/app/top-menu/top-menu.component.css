@@ -1,0 +1,29 @@
+.top-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.top-menu a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.top-menu a.active {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.top-menu button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
