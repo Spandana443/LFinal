@@ -1,9 +1,8 @@
-const db = require("./models/db");
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const mysql = require("mysql");
 
 const app = express();
 const PORT = 3000;
@@ -11,14 +10,33 @@ const PORT = 3000;
 // Secret key for JWT
 const secretKey = "abcd1234!@#$";
 
+// MySQL Database Configuration
+const db = mysql.createConnection({
+  host: "database-1.c9g8cagi8hsa.us-east-1.rds.amazonaws.com",
+  user: "admin",
+  password: "Adminadmin",
+  database: "L03_database",
+});
+
+// Connect to the Database
+db.connect((err) => {
+  if (err) {
+    console.error("MySQL connection error:", err);
+    process.exit(1);
+  }
+  console.log("Connected to MySQL database!");
+});
+
 // Middleware
 app.use(bodyParser.json()); // To parse JSON request bodies
-app.use(cors({
-  origin: 'http://localhost:4200', // Replace with your frontend's origin
-  methods: ['GET', 'PUT', 'OPTIONS', 'DELETE', 'PATCH', 'POST'],       // Allow these methods
-  allowedHeaders: ['Authorization', 'Content-Type'], // Allow these headers
-  allowCredentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:4200", // Replace with your frontend's origin
+    methods: ["GET", "PUT", "OPTIONS", "DELETE", "PATCH", "POST"], // Allow these methods
+    allowedHeaders: ["Authorization", "Content-Type"], // Allow these headers
+    allowCredentials: true,
+  })
+);
 
 // Route: Test Server
 app.get("/", (req, res) => {
@@ -28,7 +46,6 @@ app.get("/", (req, res) => {
 // Route: Login
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
-  //console.log("Login attempt:", username, password)
 
   // Hardcoded credentials for testing purposes
   if (username === "Lakshmi" && password === "Lakshmi") {
@@ -43,7 +60,6 @@ app.post("/api/login", (req, res) => {
 });
 
 // Middleware: JWT Authentication
-
 const authenticateToken = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1]; // Extract the token
   if (!token) return res.sendStatus(403); // Forbidden if no token is provided
@@ -54,7 +70,6 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
 
 // Route: Summary Chart Data
 app.get("/api/summary-chart", authenticateToken, (req, res) => {
