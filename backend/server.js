@@ -26,12 +26,23 @@ db.connect((err) => {
   }
   console.log("Connected to MySQL database!");
 });
+const allowedOrigins = [
+  "http://localhost:4200",   // Local development
+  "http://137.184.69.22:4200" // Production/Server IP
+];
 
 // Middleware
 app.use(bodyParser.json()); // To parse JSON request bodies
 app.use(
   cors({
-    origin: "http://localhost:4200", // Replace with your frontend's origin
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "PUT", "OPTIONS", "DELETE", "PATCH", "POST"], // Allow these methods
     allowedHeaders: ["Authorization", "Content-Type"], // Allow these headers
     allowCredentials: true,
